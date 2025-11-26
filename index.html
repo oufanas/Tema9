@@ -36,6 +36,21 @@
             height: 100%;
             border-radius: 10px;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Resolution Display */
+        .resolution-tag {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: rgba(0,0,0,0.6);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #0f0;
+            font-weight: bold;
+            pointer-events: none;
         }
 
         /* TV legs */
@@ -88,9 +103,10 @@
     <h1>📺 Mi TV con YouTube</h1>
 
     <!-- TV Structure -->
-    <div class="tv">
-        <div class="screen">
+    <div class="tv" id="tvBox">
+        <div class="screen" id="tvScreen">
             <div id="player"></div>
+            <div class="resolution-tag" id="resolutionTag">-- x --</div>
         </div>
     </div>
 
@@ -115,6 +131,20 @@
         let player;
         let progressBar = document.getElementById("progress");
         let duration = 0;
+
+        const screenBox = document.getElementById("tvScreen");
+        const resolutionText = document.getElementById("resolutionTag");
+
+        // Función para actualizar la resolución
+        function updateResolution() {
+            let w = screenBox.clientWidth;
+            let h = screenBox.clientHeight;
+            resolutionText.textContent = `${w}px × ${h}px`;
+        }
+
+        // Actualizar resolución al cargar y al redimensionar
+        window.addEventListener("resize", updateResolution);
+        new ResizeObserver(updateResolution).observe(screenBox);
 
         // Cargar API de YouTube
         let tag = document.createElement("script");
@@ -141,7 +171,8 @@
         function onPlayerReady() {
             duration = player.getDuration();
 
-            // Actualizar barra cada 500ms
+            updateResolution(); // <<< mostrar resolución inicial
+
             setInterval(() => {
                 let current = player.getCurrentTime();
                 let percent = (current / duration) * 100;
@@ -149,7 +180,7 @@
             }, 500);
         }
 
-        // Controlar avance manual del video
+        // Control del slider
         progressBar.addEventListener("input", () => {
             let newTime = (progressBar.value / 100) * duration;
             player.seekTo(newTime, true);
