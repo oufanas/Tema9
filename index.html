@@ -103,9 +103,11 @@
     <h1>📺 Mi TV con YouTube</h1>
 
     <!-- TV Structure -->
-    <div class="tv" id="tvBox">
-        <div class="screen" id="tvScreen">
+    <div class="tv">
+        <div class="screen">
             <div id="player"></div>
+
+            <!-- Resolution of the WEBPAGE -->
             <div class="resolution-tag" id="resolutionTag">-- x --</div>
         </div>
     </div>
@@ -132,19 +134,16 @@
         let progressBar = document.getElementById("progress");
         let duration = 0;
 
-        const screenBox = document.getElementById("tvScreen");
         const resolutionText = document.getElementById("resolutionTag");
 
-        // Función para actualizar la resolución
-        function updateResolution() {
-            let w = screenBox.clientWidth;
-            let h = screenBox.clientHeight;
+        // --- Mostrar resolución de la página ---
+        function updatePageResolution() {
+            let w = window.innerWidth;
+            let h = window.innerHeight;
             resolutionText.textContent = `${w}px × ${h}px`;
         }
 
-        // Actualizar resolución al cargar y al redimensionar
-        window.addEventListener("resize", updateResolution);
-        new ResizeObserver(updateResolution).observe(screenBox);
+        window.addEventListener("resize", updatePageResolution);
 
         // Cargar API de YouTube
         let tag = document.createElement("script");
@@ -171,7 +170,7 @@
         function onPlayerReady() {
             duration = player.getDuration();
 
-            updateResolution(); // <<< mostrar resolución inicial
+            updatePageResolution(); // mostrar resolución inicial
 
             setInterval(() => {
                 let current = player.getCurrentTime();
