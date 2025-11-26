@@ -31,7 +31,7 @@
             font-size: 14px;
             color: #0f0;
             font-weight: bold;
-            z-index: 9999;
+            z-index: 2000;
             pointer-events: none;
         }
 
@@ -47,13 +47,16 @@
             margin-top: 30px;
         }
 
+        /* TV screen */
         .screen {
             width: 100%;
             height: 100%;
             border-radius: 10px;
             overflow: hidden;
+            position: relative;
         }
 
+        /* TV legs */
         .legs {
             width: 600px;
             display: flex;
@@ -68,6 +71,7 @@
             margin-top: 5px;
         }
 
+        /* Buttons */
         .controls {
             margin-top: 20px;
             display: flex;
@@ -90,6 +94,7 @@
             background: #ff8533;
         }
 
+        /* Slider */
         #progress {
             width: 550px;
             margin-top: 20px;
@@ -98,14 +103,14 @@
 </head>
 <body>
 
-    <!-- Resolution floating tag -->
+    <!-- Floating resolution display (TOP RIGHT OF PAGE) -->
     <div class="resolution-tag" id="resolutionTag">-- x --</div>
 
     <h1>📺 Mi TV con YouTube</h1>
 
     <!-- TV Structure -->
-    <div class="tv">
-        <div class="screen">
+    <div class="tv" id="tvBox">
+        <div class="screen" id="tvScreen">
             <div id="player"></div>
         </div>
     </div>
@@ -115,6 +120,7 @@
         <div class="leg"></div>
     </div>
 
+    <!-- Custom Controls -->
     <div class="controls">
         <button onclick="playVideo()">▶ Play</button>
         <button onclick="pauseVideo()">⏸ Pausa</button>
@@ -122,8 +128,10 @@
         <button onclick="toggleMute()">🔇 Mute/Unmute</button>
     </div>
 
+    <!-- Progress Slider -->
     <input type="range" id="progress" min="0" max="100" value="0">
 
+    <!-- YouTube API Script -->
     <script>
         let player;
         let progressBar = document.getElementById("progress");
@@ -131,18 +139,60 @@
 
         const resolutionText = document.getElementById("resolutionTag");
 
-        // --- Mostrar resolución de la página ---
+        // --- Show page resolution ---
         function updatePageResolution() {
-            let w = window.innerWidth;
-            let h = window.innerHeight;
-            resolutionText.textContent = `${w}px × ${h}px`;
+            resolutionText.textContent = `${window.innerWidth}px × ${window.innerHeight}px`;
         }
 
         window.addEventListener("resize", updatePageResolution);
+        updatePageResolution(); // initial
 
-        // Inicia mostrando la resolución
-        updatePageResolution();
-
-        // Cargar API de YouTube
+        // Load YouTube API
         let tag = document.createElement("script");
-        tag.src = "https://www.youtube.com
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.body.appendChild(tag);
+
+        // Create player
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player("player", {
+                height: "100%",
+                width: "100%",
+                videoId: "dQw4w9WgXcQ",
+                playerVars: {
+                    controls: 0,
+                    autoplay: 0
+                },
+                events: {
+                    onReady: onPlayerReady
+                }
+            });
+        }
+
+        // Player ready
+        function onPlayerReady() {
+            duration = player.getDuration();
+
+            setInterval(() => {
+                let current = player.getCurrentTime();
+                let percent = (current / duration) * 100;
+                progressBar.value = percent;
+            }, 500);
+        }
+
+        // Slider control
+        progressBar.addEventListener("input", () => {
+            let newTime = (progressBar.value / 100) * duration;
+            player.seekTo(newTime, true);
+        });
+
+        // Buttons
+        function playVideo() { player.playVideo(); }
+        function pauseVideo() { player.pauseVideo(); }
+        function stopVideo() { player.stopVideo(); }
+        function toggleMute() {
+            if (player.isMuted()) player.unMute();
+            else player.mute();
+        }
+    </script>
+</body>
+</html>
