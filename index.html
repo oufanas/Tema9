@@ -75,6 +75,12 @@
         button:hover {
             background: #ff8533;
         }
+
+        /* Slider */
+        #progress {
+            width: 550px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -101,9 +107,14 @@
         <button onclick="toggleMute()">🔇 Mute/Unmute</button>
     </div>
 
+    <!-- Progress Slider -->
+    <input type="range" id="progress" min="0" max="100" value="0">
+
     <!-- YouTube API Script -->
     <script>
         let player;
+        let progressBar = document.getElementById("progress");
+        let duration = 0;
 
         // Cargar API de YouTube
         let tag = document.createElement("script");
@@ -115,13 +126,34 @@
             player = new YT.Player("player", {
                 height: "100%",
                 width: "100%",
-                videoId: "dQw4w9WgXcQ",  // Cambia ID por el video que quieras
+                videoId: "dQw4w9WgXcQ",
                 playerVars: {
-                    controls: 0,  // Oculta controles nativos
+                    controls: 0,
                     autoplay: 0
+                },
+                events: {
+                    onReady: onPlayerReady
                 }
             });
         }
+
+        // Cuando el video está listo
+        function onPlayerReady() {
+            duration = player.getDuration();
+
+            // Actualizar barra cada 500ms
+            setInterval(() => {
+                let current = player.getCurrentTime();
+                let percent = (current / duration) * 100;
+                progressBar.value = percent;
+            }, 500);
+        }
+
+        // Controlar avance manual del video
+        progressBar.addEventListener("input", () => {
+            let newTime = (progressBar.value / 100) * duration;
+            player.seekTo(newTime, true);
+        });
 
         // Custom controls
         function playVideo() {
