@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Galería CSS con Grids Personalizados</title>
+<title>Galería CSS con Grids Funcionales</title>
 
 <style>
     :root {
@@ -31,115 +31,74 @@
         -webkit-text-fill-color: transparent;
     }
 
-    /* --- GRID PRINCIPAL --- */
-
+    /* 🔥 GRID FUNCIONAL */
     .grid {
         width: 100%;
         max-width: 1200px;
         display: grid;
         gap: 25px;
 
-        /* GRID COMPLEJO CON ÁREAS */
         grid-template-columns: repeat(6, 1fr);
-        grid-auto-rows: 180px;
+        grid-template-rows: repeat(4, 180px);
 
         grid-template-areas:
             "bshadow bshadow tshadow tshadow radial radial"
-            "border  linear  linear  conic   conic   conic"
-            "repeat  repeat  linear2 linear2 linear2 conic";
+            "bshadow bshadow border  linear  conic   conic"
+            "repeat  repeat  linear2 linear2 conic   conic"
+            "repeat  repeat  radial2 radial2 radial2 radial2";
     }
 
-    /* --- TARJETAS --- */
-
+    /* TARJETAS */
     .card {
         background: var(--card-bg);
         border-radius: var(--radius);
         padding: var(--padding);
         box-shadow: var(--shadow);
-        transition: 0.3s;
         display: flex;
         flex-direction: column;
-        justify-content: center;
     }
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 35px rgba(0,0,0,0.18);
+    .card h2 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+        text-align: center;
     }
 
+    /* Cajas internas que se expanden */
     .box {
         width: 100%;
-        height: 100%;
+        flex-grow: 1; /* 👈 AHORA SI SE EXPANDE */
         border-radius: var(--radius);
     }
 
-    /* --- ASIGNACIÓN DE ÁREAS --- */
-
+    /* ÁREAS */
     .area-boxshadow { grid-area: bshadow; }
     .area-textshadow { grid-area: tshadow; }
-    .area-border     { grid-area: border; }
-    .area-linear     { grid-area: linear; }
-    .area-radial     { grid-area: radial; }
-    .area-conic      { grid-area: conic; }
-    .area-repeat     { grid-area: repeat; }
-    .area-linear2    { grid-area: linear2; }
+    .area-border { grid-area: border; }
+    .area-linear { grid-area: linear; }
+    .area-radial { grid-area: radial; }
+    .area-conic { grid-area: conic; }
+    .area-repeat { grid-area: repeat; }
+    .area-linear2 { grid-area: linear2; }
+    .area-radial2 { grid-area: radial2; }
 
-    /* --- DEMOS --- */
-
-    .box-shadow { 
-        background: #fff; 
-        box-shadow: 0 12px 25px rgba(0,0,0,0.25);
-    }
-
-    .text-shadow {
-        font-size: 34px;
-        text-align: center;
-        margin-top: auto;
-        margin-bottom: auto;
-        font-weight: bold;
-        text-shadow: 3px 4px 8px rgba(0,0,0,0.25);
-    }
-
-    .border-shadow {
-        background: #fff;
-        border: 10px solid transparent;
-        filter: drop-shadow(0 0 12px rgba(0,0,0,0.45));
-    }
-
-    .linear {
-        background: linear-gradient(135deg, #ff9966, #ff5e62);
-    }
-
-    .linear2 {
-        background: linear-gradient(120deg, #42e695, #3bb2b8);
-    }
-
-    .radial {
-        background: radial-gradient(circle, #4facff, #003cff);
-    }
-
-    .conic {
-        background: conic-gradient(
-            from 90deg,
-            #ff0000, #ffa500, #ffff00, #00ff00,
-            #00ffff, #0000ff, #ff00ff, #ff0000
-        );
-    }
-
-    .repeating {
-        background: repeating-linear-gradient(
-            45deg,
-            #222 0 10px,
-            #eee 10px 20px
-        );
-    }
+    /* DEMOS */
+    .box-shadow { background: #fff; box-shadow: 0 12px 25px rgba(0,0,0,0.25);}
+    .text-shadow { font-size: 42px; margin-top:auto; margin-bottom:auto; text-align:center;text-shadow:3px 4px 8px rgba(0,0,0,0.25);}
+    .border-shadow { background: #fff; border: 12px solid transparent; filter: drop-shadow(0 0 12px rgba(0,0,0,0.45)); }
+    .linear { background: linear-gradient(135deg, #ff9966, #ff5e62); }
+    .linear2 { background: linear-gradient(120deg, #42e695, #3bb2b8); }
+    .radial { background: radial-gradient(circle, #4facff, #003cff); }
+    .radial2 { background: radial-gradient(circle at center, #ffd86f, #fc6262); }
+    .conic { background: conic-gradient(from 90deg, red, yellow, lime, cyan, blue, magenta, red); }
+    .repeating { background: repeating-linear-gradient(45deg, #222 0 10px, #eee 10px 20px); }
 
 </style>
 </head>
 
 <body>
 
-<h1>Galería CSS con Grids</h1>
+<h1>Galería CSS con Grids Personalizados</h1>
 
 <div class="grid">
 
@@ -174,13 +133,18 @@
     </div>
 
     <div class="card area-repeat">
-        <h2>Repeating Linear Gradient</h2>
+        <h2>Repeating Gradient</h2>
         <div class="box repeating"></div>
     </div>
 
     <div class="card area-linear2">
         <h2>Linear Gradient 2</h2>
         <div class="box linear2"></div>
+    </div>
+
+    <div class="card area-radial2">
+        <h2>Radial Gradient 2</h2>
+        <div class="box radial2"></div>
     </div>
 
 </div>
