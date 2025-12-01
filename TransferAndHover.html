@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Animaciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            gap: 40px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        /* BOTÓN CON HOVER */
+        .boton {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .boton:hover {
+            transform: scale(1.1) rotate(-3deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* TARJETA CON HOVER */
+        .tarjeta {
+            width: 250px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+        }
+
+        .tarjeta img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.4s ease;
+        }
+
+        .tarjeta:hover img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* EFECTO DE TEXTO ANIMADO */
+        .texto-animado {
+            font-size: 24px;
+            background: linear-gradient(90deg, #ff6a00, #ee0979);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .texto-animado:hover {
+            transform: scale(1.2) rotate(2deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>Hover y Animaciones</h1>
+
+    <button class="boton">¡Pásame el mouse!</button>
+
+    <div class="tarjeta">
+        <img src="https://picsum.photos/250/150" alt="Imagen Aleatoria">
+        <h2>Tarjeta Cool</h2>
+        <p>Cuando hover, todo cobra vida con movimiento y sombra.</p>
+    </div>
+
+    <p class="texto-animado">Texto que cobra vida al pasar el mouse</p>
+</body>
+</html>
