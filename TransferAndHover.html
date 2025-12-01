@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hover Animaciones con Imágenes</title>
+    <title>Tarjetas con Animaciones Chulas</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: #f5f5f5;
+            background: #f0f0f0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 50px;
             padding: 50px 20px;
+            gap: 50px;
         }
 
         h1 {
-            color: #333;
+            font-size: 36px;
+            background: linear-gradient(90deg, #ff6a00, #ee0979, #6a11cb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
         }
 
         .tarjetas {
@@ -32,28 +36,19 @@
             overflow: hidden;
             background: white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transition: all 0.5s ease;
             cursor: pointer;
-        }
-
-        .tarjeta:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
         }
 
         .tarjeta img {
             width: 100%;
             height: 150px;
             object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .tarjeta:hover img {
-            transform: scale(1.1) rotate(3deg);
+            transition: all 0.5s ease;
         }
 
         .contenido {
-            padding: 20px;
+            padding: 15px 20px;
             text-align: center;
         }
 
@@ -61,92 +56,96 @@
             margin: 10px 0;
             font-size: 20px;
             color: #333;
-            transition: color 0.3s ease;
-        }
-
-        .tarjeta:hover .contenido h2 {
-            color: #ff6a00;
+            transition: all 0.3s ease;
         }
 
         .contenido p {
             font-size: 14px;
             color: #666;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .tarjeta:hover .contenido p {
-            color: #333;
+        /* EFECTOS DE HOVER DIFERENTES */
+        .girar:hover {
+            transform: rotateY(180deg);
         }
 
-        /* Animación de botón */
-        .boton {
-            padding: 15px 35px;
-            font-size: 18px;
-            border: none;
-            border-radius: 50px;
-            background: linear-gradient(45deg, #ff6a00, #ee0979);
-            color: white;
-            cursor: pointer;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        .maximizar:hover {
+            transform: scale(1.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        .boton:hover {
-            transform: scale(1.15) rotate(-5deg);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+        .inclinar:hover {
+            transform: rotate(-10deg) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
-        /* Animación de texto */
-        .texto-animado {
-            font-size: 28px;
-            background: linear-gradient(90deg, #ff6a00, #ee0979, #6a11cb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            transition: transform 0.3s ease, filter 0.3s ease;
+        .flotar:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.35);
         }
 
-        .texto-animado:hover {
-            transform: scale(1.2) rotate(2deg);
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
+        .rebotar:hover {
+            animation: rebotar 0.5s ease;
         }
+
+        @keyframes rebotar {
+            0% { transform: translateY(0); }
+            30% { transform: translateY(-15px); }
+            50% { transform: translateY(0); }
+            70% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Animaciones de la imagen */
+        .tarjeta:hover img {
+            filter: brightness(1.1);
+        }
+
     </style>
 </head>
 <body>
 
-    <h1 class="texto-animado">¡Hover y Animaciones Cobran Vida!</h1>
-
-    <button class="boton">Pásame el Mouse</button>
+    <h1>Tarjetas Animadas al Hover</h1>
 
     <div class="tarjetas">
-        <div class="tarjeta">
-            <img src="https://picsum.photos/250/150?random=1" alt="Imagen 1">
+        <div class="tarjeta girar">
+            <img src="https://picsum.photos/250/150?random=10" alt="Girar">
             <div class="contenido">
-                <h2>Tarjeta 1</h2>
-                <p>Imágenes y animaciones que se activan al pasar el cursor.</p>
+                <h2>Girar</h2>
+                <p>Esta tarjeta rota al pasar el cursor.</p>
             </div>
         </div>
 
-        <div class="tarjeta">
-            <img src="https://picsum.photos/250/150?random=2" alt="Imagen 2">
+        <div class="tarjeta maximizar">
+            <img src="https://picsum.photos/250/150?random=11" alt="Maximizar">
             <div class="contenido">
-                <h2>Tarjeta 2</h2>
-                <p>Movimiento suave, escalado y rotación con transición elegante.</p>
+                <h2>Maximizar</h2>
+                <p>Se agranda y resalta con sombra al hover.</p>
             </div>
         </div>
 
-        <div class="tarjeta">
-            <img src="https://picsum.photos/250/150?random=3" alt="Imagen 3">
+        <div class="tarjeta inclinar">
+            <img src="https://picsum.photos/250/150?random=12" alt="Inclinar">
             <div class="contenido">
-                <h2>Tarjeta 3</h2>
-                <p>Todo cobra vida con sombras y efectos de hover interactivos.</p>
+                <h2>Inclinar</h2>
+                <p>Se inclina y escala suavemente al pasar el cursor.</p>
             </div>
         </div>
 
-        <div class="tarjeta">
-            <img src="https://picsum.photos/250/150?random=4" alt="Imagen 4">
+        <div class="tarjeta flotar">
+            <img src="https://picsum.photos/250/150?random=13" alt="Flotar">
             <div class="contenido">
-                <h2>Tarjeta 4</h2>
-                <p>Perfecta para portafolios o galerías dinámicas en GitHub.</p>
+                <h2>Flotar</h2>
+                <p>Se eleva y parece flotar sobre la página.</p>
+            </div>
+        </div>
+
+        <div class="tarjeta rebotar">
+            <img src="https://picsum.photos/250/150?random=14" alt="Rebotar">
+            <div class="contenido">
+                <h2>Rebotar</h2>
+                <p>Hace un pequeño rebote divertido al hover.</p>
             </div>
         </div>
     </div>
