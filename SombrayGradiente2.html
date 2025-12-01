@@ -2,8 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Galería CSS con Grids Funcionales</title>
-
+<title>Grid CSS con tamaños distintos</title>
 <style>
     :root {
         --bg: #f6f8fb;
@@ -31,24 +30,15 @@
         -webkit-text-fill-color: transparent;
     }
 
-    /* 🔥 GRID FUNCIONAL */
     .grid {
         width: 100%;
         max-width: 1200px;
         display: grid;
-        gap: 25px;
-
         grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: repeat(4, 180px);
-
-        grid-template-areas:
-            "bshadow bshadow tshadow tshadow radial radial"
-            "bshadow bshadow border  linear  conic   conic"
-            "repeat  repeat  linear2 linear2 conic   conic"
-            "repeat  repeat  radial2 radial2 radial2 radial2";
+        grid-auto-rows: 150px;
+        gap: 20px;
     }
 
-    /* TARJETAS */
     .card {
         background: var(--card-bg);
         border-radius: var(--radius);
@@ -56,147 +46,46 @@
         box-shadow: var(--shadow);
         display: flex;
         flex-direction: column;
-    }
-
-    .card h2 {
-        margin: 0 0 10px 0;
-        font-size: 18px;
+        justify-content: center;
+        align-items: center;
         text-align: center;
+        color: #333;
+        font-weight: bold;
+        font-size: 18px;
     }
 
-    /* Cajas internas que se expanden */
     .box {
         width: 100%;
-        flex-grow: 1; /* 👈 AHORA SI SE EXPANDE */
+        height: 100%;
         border-radius: var(--radius);
     }
 
-    /* ÁREAS */
-    .area-boxshadow { grid-area: bshadow; }
-    .area-textshadow { grid-area: tshadow; }
-    .area-border { grid-area: border; }
-    .area-linear { grid-area: linear; }
-    .area-radial { grid-area: radial; }
-    .area-conic { grid-area: conic; }
-    .area-repeat { grid-area: repeat; }
-    .area-linear2 { grid-area: linear2; }
-    .area-radial2 { grid-area: radial2; }
-
-    /* DEMOS */
-    .box-shadow { background: #fff; box-shadow: 0 12px 25px rgba(0,0,0,0.25);}
-    .text-shadow { font-size: 42px; margin-top:auto; margin-bottom:auto; text-align:center;text-shadow:3px 4px 8px rgba(0,0,0,0.25);}
-    .border-shadow { background: #fff; border: 12px solid transparent; filter: drop-shadow(0 0 12px rgba(0,0,0,0.45)); }
-    .linear { background: linear-gradient(135deg, #ff9966, #ff5e62); }
-    .linear2 { background: linear-gradient(120deg, #42e695, #3bb2b8); }
-    .radial { background: radial-gradient(circle, #4facff, #003cff); }
-    .radial2 { background: radial-gradient(circle at center, #ffd86f, #fc6262); }
-    .conic { background: conic-gradient(from 90deg, red, yellow, lime, cyan, blue, magenta, red); }
-    .repeating { background: repeating-linear-gradient(45deg, #222 0 10px, #eee 10px 20px); }
+    /* Tamaños específicos usando grid-column / grid-row */
+    .box-shadow { grid-column: span 2; grid-row: span 2; background: #fff; box-shadow: 0 12px 25px rgba(0,0,0,0.25); }
+    .text-shadow { grid-column: span 2; grid-row: span 1; font-size: 32px; text-shadow: 3px 4px 8px rgba(0,0,0,0.25); display:flex; justify-content:center; align-items:center; }
+    .border-shadow { grid-column: span 1; grid-row: span 1; background: #fff; border: 8px solid transparent; filter: drop-shadow(0 0 12px rgba(0,0,0,0.45)); }
+    .linear { grid-column: span 2; grid-row: span 1; background: linear-gradient(135deg, #ff9966, #ff5e62); }
+    .radial { grid-column: span 1; grid-row: span 2; background: radial-gradient(circle, #4facff, #003cff); }
+    .conic { grid-column: span 3; grid-row: span 1; background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red); }
+    .repeating { grid-column: span 2; grid-row: span 1; background: repeating-linear-gradient(45deg, #222 0 10px, #eee 10px 20px); }
+    .linear2 { grid-column: span 1; grid-row: span 2; background: linear-gradient(120deg, #42e695, #3bb2b8); }
 
 </style>
 </head>
-
 <body>
 
-<h1>Galería CSS con Grids Personalizados</h1>
+<h1>Grid CSS con tamaños distintos</h1>
 
 <div class="grid">
-
-    <div class="card area-boxshadow">
-        <h2>Box Shadow</h2>
-        <div class="box box-shadow"></div>
-    </div>
-
-    <div class="card area-textshadow">
-        <h2>Text Shadow</h2>
-        <div class="text-shadow">Sombra</div>
-    </div>
-
-    <div class="card area-border">
-        <h2>Border Shadow</h2>
-        <div class="box border-shadow"></div>
-    </div>
-
-    <div class="card area-linear">
-        <h2>Linear Gradient</h2>
-        <div class="box linear"></div>
-    </div>
-
-    <div class="card area-radial">
-        <h2>Radial Gradient</h2>
-        <div class="box radial"></div>
-    </div>
-
-    <div class="card area-conic">
-        <h2>Conic Gradient</h2>
-        <div class="box conic"></div>
-    </div>
-
-    <div class="card area-repeat">
-        <h2>Repeating Gradient</h2>
-        <div class="box repeating"></div>
-    </div>
-
-    <div class="card area-linear2">
-        <h2>Linear Gradient 2</h2>
-        <div class="box linear2"></div>
-    </div>
-
-    <div class="card area-radial2">
-        <h2>Radial Gradient 2</h2>
-        <div class="box radial2"></div>
-    </div>
-
+    <div class="card box-shadow">Box Shadow</div>
+    <div class="card text-shadow">Text Shadow</div>
+    <div class="card border-shadow">Border Shadow</div>
+    <div class="card linear">Linear Gradient</div>
+    <div class="card radial">Radial Gradient</div>
+    <div class="card conic">Conic Gradient</div>
+    <div class="card repeating">Repeating Gradient</div>
+    <div class="card linear2">Linear Gradient 2</div>
 </div>
 
-<!-- ************************************************************************************ -->
-<!-- ************************ Indicador del ancho de pantalla *************************** -->
-<div id="screenWidthDisplay"></div>
- 
-<style>
-
-  #screenWidthDisplay {
-
-    position: fixed;
-
-    top: 10px;
-
-    right: 10px;
-
-    background: rgba(0,0,0,0.7);
-
-    color: #fff;
-
-    padding: 6px 12px;
-
-    font-size: 14px;
-
-    border-radius: 8px;
-
-    z-index: 99999;
-
-    font-family: Arial, sans-serif;
-
-  }
-</style>
- 
-<script>
-
-  function updateScreenWidth() {
-
-    const w = window.innerWidth;
-
-    document.getElementById("screenWidthDisplay").textContent = `${w}px`;
-
-  }
- 
-  updateScreenWidth();
-
-  window.addEventListener("resize", updateScreenWidth);
-</script>
-<!-- ************************************************************************************ -->
-<!-- ************************************************************************************ -->
- 
-    
 </body>
 </html>
