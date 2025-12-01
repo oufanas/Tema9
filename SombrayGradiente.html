@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ejemplos CSS</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f3f3f3;
+        padding: 20px;
+    }
+
+    h2 {
+        margin-top: 40px;
+    }
+
+    .demo-box {
+        width: 250px;
+        height: 120px;
+        margin: 20px 0;
+        padding: 20px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        border: 2px solid #ddd;
+    }
+
+    /* 1. Box-shadow */
+    .box-shadow {
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* 2. Text-shadow */
+    .text-shadow {
+        font-size: 32px;
+        font-weight: bold;
+        text-shadow: 3px 3px 5px rgba(0,0,0,0.4);
+    }
+
+    /* 3. Border-shadow (simulación usando drop-shadow) */
+    .border-shadow {
+        background: white;
+        border: 8px solid transparent;
+        filter: drop-shadow(0 0 10px rgba(0,0,0,0.4));
+    }
+
+    /* 4. Linear Gradient */
+    .linear-gradient {
+        background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    }
+
+    /* 5. Radial Gradient */
+    .radial-gradient {
+        background: radial-gradient(circle, #4facfe, #00f2fe);
+    }
+
+    /* 6. Conic Gradient */
+    .conic-gradient {
+        background: conic-gradient(#ff0000, #00ff00, #0000ff);
+    }
+
+    /* 7. Repeating linear gradient */
+    .repeating-linear-gradient {
+        background: repeating-linear-gradient(
+            45deg,
+            #000,
+            #000 10px,
+            #fff 10px,
+            #fff 20px
+        );
+    }
+</style>
+</head>
+<body>
+
+<h1>Ejemplos de efectos CSS</h1>
+
+<h2>1. box-shadow</h2>
+<div class="demo-box box-shadow">box-shadow</div>
+
+<h2>2. text-shadow</h2>
+<div class="text-shadow">Texto</div>
+
+<h2>3. border-shadow (drop-shadow)</h2>
+<div class="demo-box border-shadow">border-shadow</div>
+
+<h2>4. linear-gradient</h2>
+<div class="demo-box linear-gradient"></div>
+
+<h2>5. radial-gradient</h2>
+<div class="demo-box radial-gradient"></div>
+
+<h2>6. conic-gradient</h2>
+<div class="demo-box conic-gradient"></div>
+
+<h2>7. repeating-linear-gradient</h2>
+<div class="demo-box repeating-linear-gradient"></div>
+
+</body>
+</html>
